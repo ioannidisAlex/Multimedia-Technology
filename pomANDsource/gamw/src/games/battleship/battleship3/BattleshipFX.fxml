@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  Basic code of Mr.Hallvard Trætteberg. My code implementations
+  can be found in the directory  battleship3 (.)
+  I, Alexandros Ioannidis,
+  used imagegrid's code for my univ's course (multimedia technology)
+-->
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import games.battleship.battleship3.Battleship?>
+<?import games.battleship.battleship3.BattleshipGame?>
+<?import games.battleship.battleship3.HuntAndTargetEnemy?>
+<?import games.battleship.battleship3.RandomEnemy?>
+<?import games.imagegrid.ImageGrid?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import java.util.Map.Entry?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="games.battleship.battleship3.BattleshipFX"
+    prefHeight="950" prefWidth="650">
+    <fx:define>
+    	<games.battleship.battleship3.Battleship fx:id="playerBoard"/>
+    	<games.battleship.battleship3.RandomEnemy fx:id="enemy"/>
+        <games.battleship.battleship3.BattleshipGame fx:id="game"/>
+    </fx:define>
+	<top>
+		<VBox>
+			<HBox>
+			    <MenuBar layoutX="10.0" layoutY="10.0">
+					<Menu mnemonicParsing="false" text="Application">
+		               <items>
+		                  <MenuItem mnemonicParsing="false" text="New" />
+		                  <MenuItem mnemonicParsing="false" text="Exit" />
+		               </items>
+		            </Menu>
+		        </MenuBar>
+				<Label text=" eLoVal   eLoVal  eLoVal   eLoVal   "/>
+				<TextField fx:id="alef" HBox.hgrow="ALWAYS" promptText="Level" onAction="#startGame"
+					text="eLoVal"
+				/>
+				<Button text="Load" onAction="#loadSFT"/>			
+				<Button text="Start" onAction="#startGame"/>
+			</HBox>
+			<Text fx:id="generalInfoGame" VBox.vgrow="ALWAYS">
+                <font>
+                    <Font name="Arial"/>
+                </font>
+            </Text>
+		</VBox>
+	</top>
+	<center>
+		<ImageGrid fx:id="imageGrid"
+			imageUrlFormat="/games/battleship/${key}.png"
+			onKeyPressed="#keyPressed"
+			onMousePressed="#mouseClicked" hgap="1" vgap="1"
+		>
+			<imageKeyMapEntries>
+				<java.util.Map.Entry key="~" value="ocean64x64"/>
+				<java.util.Map.Entry key="." value="miss64x64"/>
+				<java.util.Map.Entry key="X" value="hit64x64"/>
+				<java.util.Map.Entry key="D" value="destroyer64x64"/>
+				<java.util.Map.Entry key="S" value="submarine64x64"/>
+				<java.util.Map.Entry key="U" value="cruiser64x64"/>
+				<java.util.Map.Entry key="B" value="battleship64x64"/>
+				<java.util.Map.Entry key="C" value="carrier64x64"/>
+			</imageKeyMapEntries>
+		</ImageGrid>
+	</center>
+	<bottom>
+        <VBox>
+            <Text fx:id="messageText" VBox.vgrow="ALWAYS">
+                <font>
+                    <Font name="Courier"/>
+                </font>
+            </Text>
+       </VBox>
+	</bottom>
+</BorderPane>
